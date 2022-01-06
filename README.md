@@ -1,8 +1,6 @@
 # Accessing Resource using JWT-Filter
 this repository contains all the modules related JWT(java web tokenization) using Spring boot Security as branches of the repository.
 
-this repository contains all the modules related JWT(java web tokenization) using Spring boot Security as branches of the repository.
-
 Steps to create JWT token
 
     Create project with spring web, spring security dependency that will provide simple form login authentication. add jjwt and xml binder dependency from maven repository for jwt token generation. make config class and enable WebSecurity using annotation and make AuthenticationManager, PasswordwordEncoder beans also override configure methods with AuthenticationBuilder and Http parameters. make JwtTokenUtil class and get source code from internet that class provides following functionality:
