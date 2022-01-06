@@ -3,12 +3,11 @@ package com.spring.securityjwt.controllers.rest;
 import com.spring.securityjwt.pojos.JwtRequest;
 import com.spring.securityjwt.pojos.JwtResponse;
 import com.spring.securityjwt.services.CustomUserDetailsService;
-import com.spring.securityjwt.utils.JwtUtil;
+import com.spring.securityjwt.utils.JwtTokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,7 +19,7 @@ public class JwtRestController {
     AuthenticationManager authenticationManager;
 
     @Autowired
-    JwtUtil jwtUtil;
+    JwtTokenUtil jwtTokenUtil;
 
     @Autowired
     CustomUserDetailsService customUserDetailsService;
@@ -34,7 +33,7 @@ public class JwtRestController {
             e.printStackTrace();
             throw new Exception("Bad Credentials.");
         }
-        String token= jwtUtil.generateToken(customUserDetailsService.loadUserByUsername(jwtRequest.getUsername()));
+        String token= jwtTokenUtil.generateToken(customUserDetailsService.loadUserByUsername(jwtRequest.getUsername()));
         return ResponseEntity.ok(new JwtResponse(token));
     }
 }

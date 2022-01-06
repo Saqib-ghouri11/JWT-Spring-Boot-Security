@@ -9,3 +9,5 @@ spring:
 
   main:
     allow-circular-references: true
+jwt:
+  secret: secret

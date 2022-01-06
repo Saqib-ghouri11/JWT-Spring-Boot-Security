@@ -1,5 +1,6 @@
 package com.spring.securityjwt.configs;
 
+import com.spring.securityjwt.filters.JwtRequestFilter;
 import com.spring.securityjwt.services.CustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -12,6 +13,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
@@ -19,6 +21,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     CustomUserDetailsService customUserDetailsService;
+    @Autowired
+    JwtRequestFilter jwtRequestFilter;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -28,7 +32,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .authorizeRequests().antMatchers("/get-token").permitAll()
                     .anyRequest().authenticated()
                     .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+        // Add a filter to validate the tokens with every request
+        http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
     }
+
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
