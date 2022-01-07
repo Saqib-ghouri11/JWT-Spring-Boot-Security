@@ -30,5 +30,8 @@ public class UserDto {
     @NotNull
     @NotEmpty(message = "password can not be null or empty")
     private String password;
+    @NotEmpty
+    @NotNull
+    private String role="ROLE_NORMAL";
 
 }

@@ -30,7 +30,7 @@ public class JwtRestController {
     public ResponseEntity<?> generateToken(@RequestBody JwtRequest jwtRequest) throws Exception {
         System.out.println(jwtRequest.toString());
         try {
-            this.authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(jwtRequest.getEmail(),jwtRequest.getPassword(),new ArrayList<>()));
+            this.authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(jwtRequest.getEmail(),jwtRequest.getPassword()));
         }catch (Exception e){
             e.printStackTrace();
             throw new Exception("Bad Credentials.");

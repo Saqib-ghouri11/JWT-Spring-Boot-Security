@@ -4,7 +4,6 @@ import com.spring.securityjwt.pojos.UserDto;
 import com.spring.securityjwt.repos.UserRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import  com.spring.securityjwt.entities.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -29,7 +28,7 @@ public class CustomUserDetailsService implements UserDetailsService {
         if(user!=null) {
             //this will return user from database
             return org.springframework.security.core.userdetails.User.withUsername(user.getEmail()).password(user.getPassword())
-                    .disabled(false).authorities(new ArrayList<>()).build();
+                    .disabled(false).authorities(user.getRole()).build();
         }
         else{
             throw new UsernameNotFoundException("Invalid Credentials");
