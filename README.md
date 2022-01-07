@@ -1,4 +1,4 @@
-# Accessing Resource using JWT-Filter
+# Database Integration using JWT-Filter
 this repository contains all the modules related JWT(java web tokenization) using Spring boot Security as branches of the repository.
 
 Steps to create JWT token
@@ -23,7 +23,7 @@ Steps to create JWT token
 
 >>>According to JWS Compact Serialization(https://tools.ietf.org/html/draft-ietf-jose-json-web-signature-41#section-3.1) compaction of the JWT to a URL-safe string.
 
-        validate token
+       validate token.
 
 Then create JwtTokenFilter class that will get token from header authenticate it and then pass it with the request to access the resource.
 
@@ -36,3 +36,7 @@ the filter class provides the following functionality:
 > if token is valid configure Spring Security to manually set authentication
 
 >After setting the Authentication in the context, we specify that the current user is authenticated. So it passes the Spring Security Configurations successfully.
+
+Updateions: 
+
+>Just make an Entity and in user Custom User details Service use User from user repository.
