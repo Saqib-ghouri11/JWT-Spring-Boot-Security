@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
+
 @RestController
 public class JwtRestController {
 
@@ -28,12 +30,12 @@ public class JwtRestController {
     public ResponseEntity<?> generateToken(@RequestBody JwtRequest jwtRequest) throws Exception {
         System.out.println(jwtRequest.toString());
         try {
-            this.authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(jwtRequest.getUsername(),jwtRequest.getPassword()));
+            this.authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(jwtRequest.getEmail(),jwtRequest.getPassword(),new ArrayList<>()));
         }catch (Exception e){
             e.printStackTrace();
             throw new Exception("Bad Credentials.");
         }
-        String token= jwtTokenUtil.generateToken(customUserDetailsService.loadUserByUsername(jwtRequest.getUsername()));
+        String token= jwtTokenUtil.generateToken(customUserDetailsService.loadUserByUsername(jwtRequest.getEmail()));
         return ResponseEntity.ok(new JwtResponse(token));
     }
 }
