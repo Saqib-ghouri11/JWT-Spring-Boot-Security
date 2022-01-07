@@ -37,6 +37,6 @@ the filter class provides the following functionality:
 
 >After setting the Authentication in the context, we specify that the current user is authenticated. So it passes the Spring Security Configurations successfully.
 
-Updateions: 
+Updations: 
 
 >Just make an Entity and in user Custom User details Service use User from user repository.
